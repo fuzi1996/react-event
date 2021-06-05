@@ -1,21 +1,18 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import TodoItem from './TodoItem'
-import { StateProps } from './Todo'
+import {TodoContext,StateProps} from './Provider'
 
 const style = {
   marginTop: '20px'
 }
 
-interface TodoListProps {
-  todoList: StateProps[];
-  changeTodo: (id:number) => void;
-}
+const TodoList = () => {
 
-const TodoList = ({todoList,changeTodo}:TodoListProps) => {
+  const {todoList} = useContext(TodoContext)
 
   const listItems = todoList.map((todo:StateProps)=>{
     return (
-      <TodoItem key={todo.id} todo={todo} changeTodo={changeTodo}></TodoItem>
+      <TodoItem key={todo.id} todo={todo}></TodoItem>
     )
   })
 
