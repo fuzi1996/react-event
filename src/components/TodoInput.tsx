@@ -3,7 +3,7 @@ import {TodoContext} from './Provider'
 
 const TodoInput = () => {
 
-  const {addTodo} = useContext(TodoContext)
+  const {dispatch} = useContext(TodoContext)
 
   const [text,setText] = useState<string>("")
 
@@ -12,10 +12,13 @@ const TodoInput = () => {
   }
 
   const addTodoHandler = () => {
-    addTodo({
-      id: new Date().getTime(),
-      text: text,
-      isFinished: false
+    dispatch({
+      type:'ADD',
+      todo:{
+        id: new Date().getTime(),
+        text: text,
+        isFinished: false
+      }
     })
     setText("")
   }

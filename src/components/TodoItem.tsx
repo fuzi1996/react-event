@@ -1,5 +1,6 @@
 import React,{useContext} from 'react'
-import {StateProps,TodoContext} from './Provider'
+import {TodoContext} from './Provider'
+import {StateProps} from '../store/reducer'
 
 const style = {
   marginTop: '5px',
@@ -12,10 +13,10 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({todo}:TodoItemProps) => {
-  const {changeTodo} = useContext(TodoContext)
+  const {dispatch} = useContext(TodoContext)
 
   const changeHandler = () => {
-    changeTodo(todo.id)
+    dispatch({type:'CHANGEFINISHED',id:todo.id})
   }
 
   const spanstyle = {

@@ -1,6 +1,7 @@
 import React,{useContext} from 'react'
 import TodoItem from './TodoItem'
-import {TodoContext,StateProps} from './Provider'
+import {TodoContext} from './Provider'
+import {StateProps} from '../store/reducer'
 
 const style = {
   marginTop: '20px'
@@ -8,9 +9,9 @@ const style = {
 
 const TodoList = () => {
 
-  const {todoList} = useContext(TodoContext)
+  const {state} = useContext(TodoContext)
 
-  const listItems = todoList.map((todo:StateProps)=>{
+  const listItems = state.map((todo:StateProps)=>{
     return (
       <TodoItem key={todo.id} todo={todo}></TodoItem>
     )
