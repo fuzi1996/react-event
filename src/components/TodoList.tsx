@@ -1,7 +1,8 @@
 import React from 'react'
+import { useStore } from '../store'
+import { StateProps } from '../store/TodoStore'
 import TodoItem from './TodoItem'
-import {StateProps,RootState} from '../store/reducer'
-import {useSelector} from 'react-redux'
+import {observer} from 'mobx-react'
 
 const style = {
   marginTop: '20px'
@@ -9,9 +10,11 @@ const style = {
 
 const TodoList = () => {
 
-  const state = useSelector((state: RootState) => state);
+  const store = useStore()
 
-  const listItems = state.map((todo:StateProps)=>{
+  console.log(store)
+
+  const listItems = store.todoList.map((todo:StateProps)=>{
     return (
       <TodoItem key={todo.id} todo={todo}></TodoItem>
     )
@@ -24,4 +27,4 @@ const TodoList = () => {
   )
 }
 
-export default TodoList
+export default observer(TodoList)

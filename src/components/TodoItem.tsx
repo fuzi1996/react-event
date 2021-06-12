@@ -1,7 +1,7 @@
-import React,{useContext} from 'react'
-import {StateProps} from '../store/reducer'
-import {useDispatch} from 'react-redux'
-import {changeFinishedAction} from '../store/action'
+import React from 'react'
+import { useStore } from '../store'
+import {StateProps} from '../store/TodoStore'
+import {observer} from 'mobx-react'
 
 const style = {
   marginTop: '5px',
@@ -14,10 +14,10 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({todo}:TodoItemProps) => {
-  const dispatch = useDispatch()
+  const store = useStore()
 
   const changeHandler = () => {
-    dispatch(changeFinishedAction(todo.id))
+    store.changeAction(todo.id)
   }
 
   const spanstyle = {
@@ -32,4 +32,4 @@ const TodoItem = ({todo}:TodoItemProps) => {
   )
 }
 
-export default TodoItem
+export default observer(TodoItem)
