@@ -1,25 +1,21 @@
-import React,{useState,useContext} from 'react'
-import {TodoContext} from './Provider'
+import React,{useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {addAction} from '../store/action'
 
 const TodoInput = () => {
-
-  const {dispatch} = useContext(TodoContext)
-
   const [text,setText] = useState<string>("")
+  const dispatch = useDispatch()
 
   const changeTextHandler = (e:React.ChangeEvent) => {
     setText((e.target as HTMLInputElement).value)
   }
 
   const addTodoHandler = () => {
-    dispatch({
-      type:'ADD',
-      todo:{
-        id: new Date().getTime(),
-        text: text,
-        isFinished: false
-      }
-    })
+    dispatch(addAction({
+      id: new Date().getTime(),
+      text: text,
+      isFinished: false
+    }))
     setText("")
   }
 

@@ -1,6 +1,7 @@
 import React,{useContext} from 'react'
-import {TodoContext} from './Provider'
 import {StateProps} from '../store/reducer'
+import {useDispatch} from 'react-redux'
+import {changeFinishedAction} from '../store/action'
 
 const style = {
   marginTop: '5px',
@@ -13,10 +14,10 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({todo}:TodoItemProps) => {
-  const {dispatch} = useContext(TodoContext)
+  const dispatch = useDispatch()
 
   const changeHandler = () => {
-    dispatch({type:'CHANGEFINISHED',id:todo.id})
+    dispatch(changeFinishedAction(todo.id))
   }
 
   const spanstyle = {

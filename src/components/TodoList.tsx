@@ -1,7 +1,7 @@
-import React,{useContext} from 'react'
+import React from 'react'
 import TodoItem from './TodoItem'
-import {TodoContext} from './Provider'
-import {StateProps} from '../store/reducer'
+import {StateProps,RootState} from '../store/reducer'
+import {useSelector} from 'react-redux'
 
 const style = {
   marginTop: '20px'
@@ -9,7 +9,7 @@ const style = {
 
 const TodoList = () => {
 
-  const {state} = useContext(TodoContext)
+  const state = useSelector((state: RootState) => state);
 
   const listItems = state.map((todo:StateProps)=>{
     return (
