@@ -1,27 +1,34 @@
-import React,{useState} from 'react'
+import React,{useRef, useEffect} from 'react'
 import {useStore} from '../store/index'
 
 const TodoInput = () => {
-  const [text,setText] = useState<string>("")
+
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const store = useStore()
 
-  const changeTextHandler = (e:React.ChangeEvent) => {
-    setText((e.target as HTMLInputElement).value)
-  }
+  // 相当于componentDidMount,componentDidUpdate,componentWillUnmount
+  useEffect(() => {
+    inputRef.current!.focus()
+  },[])
 
   const addTodoHandler = () => {
+    const value = inputRef.current!.value
+
     store.addAction({
       id: new Date().getTime(),
-      text: text,
+      text: value,
       isFinished: false
     })
-    setText("")
+
+    inputRef.current!.value = ''
+    
+    inputRef.current!.focus()
   }
 
   return (
     <div className="todo-input">
-      <input type="text" placeholder="请输入待办事项" onChange={changeTextHandler} value={text}/>
+      <input type="text" placeholder="请输入待办事项" ref={inputRef} />
       <button onClick={addTodoHandler}>添加</button>
     </div>
   )

@@ -12,8 +12,6 @@ const TodoList = () => {
 
   const store = useStore()
 
-  console.log(store)
-
   const listItems = store.todoList.map((todo:StateProps)=>{
     return (
       <TodoItem key={todo.id} todo={todo}></TodoItem>
